@@ -3,8 +3,9 @@
 
 import {
   IExplanationDashboardData,
+  IFairnessData,
   ISerializedExplanationData,
-  IFairnessData
+  ITextExplanationDashboardData
 } from "@responsible-ai/core-ui";
 import { IModelAssessmentData } from "@responsible-ai/model-assessment";
 
@@ -18,6 +19,7 @@ import { precomputedBinaryWithError } from "../fairness/__mock_data__/precompute
 import { probability } from "../fairness/__mock_data__/probability";
 import { regression } from "../fairness/__mock_data__/regression";
 import { regressionWithError } from "../fairness/__mock_data__/regressionWithError";
+import { newsgroupBinaryData } from "../interpret-text/__mock_data__/newsgroupBinaryData";
 import { automlMimicAdult } from "../interpret/__mock_data__/automlMimicAdult";
 import { bostonData } from "../interpret/__mock_data__/bostonData";
 import { bostonDataGlobal } from "../interpret/__mock_data__/bostonDataGlobal";
@@ -55,6 +57,10 @@ export interface IInterpretDataSet {
   classDimension?: 1 | 2 | 3;
 }
 
+export interface IInterpretTextDataSet {
+  data: ITextExplanationDashboardData;
+}
+
 export interface IFairnessDataSet {
   data: IFairnessData;
 }
@@ -76,6 +82,10 @@ export interface IInterpretSetting {
   versions: { [key: string]: 1 | 2 };
 }
 
+export interface IInterpretTextSetting {
+  versions: { [key: string]: 1 };
+}
+
 export interface IFairnessSetting {
   versions: { [key: string]: 2 };
 }
@@ -90,6 +100,7 @@ export interface IModelAssessmentSetting {
 
 export const applicationKeys = <const>[
   "interpret",
+  "interpretText",
   "fairness",
   "errorAnalysis",
   "modelAssessment"
@@ -100,6 +111,7 @@ export type IApplications = {
 } & {
   fairness: IFairnessSetting & IDataSet<IFairnessDataSet>;
   interpret: IInterpretSetting & IDataSet<IInterpretDataSet>;
+  interpretText: IInterpretTextSetting & IDataSet<IInterpretTextDataSet>;
   errorAnalysis: IErrorAnalysisSetting & IDataSet<IErrorAnalysisDataSet>;
   modelAssessment: IModelAssessmentSetting & IDataSet<IModelAssessmentDataSet>;
 };
@@ -167,6 +179,12 @@ export const applications: IApplications = <const>{
       largeFeatureCount: { classDimension: 2, data: largeFeatureCount }
     },
     versions: { "Version-1": 1, "Version-2": 2 }
+  },
+  interpretText: {
+    datasets: {
+      newsgroupBinaryData: { data: newsgroupBinaryData }
+    },
+    versions: { "Version-1": 1 }
   },
   modelAssessment: {
     datasets: {
