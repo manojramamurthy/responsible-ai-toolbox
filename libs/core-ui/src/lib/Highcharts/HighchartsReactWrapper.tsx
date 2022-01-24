@@ -9,10 +9,6 @@ export function HighchartsReactWrapper(): React.ReactElement {
   const chartComponentRef = React.useRef<HighchartsReact.RefObject>(null);
 
   const options = {
-    chart: {
-      type: "lowmedhigh",
-      zoomType: "xy"
-    },
     series: [
       {
         data: [
@@ -24,19 +20,19 @@ export function HighchartsReactWrapper(): React.ReactElement {
             '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f} mm</b> '
         },
         type: "scatter"
-      },
-      {
-        data: [
-          [0.024554703670239472, 0.07637320978494788],
-          [0.0000018156074109169128, 0.0000162287897705993],
-          [-0.2419328967749073, -0.1428698896693828]
-        ],
-        name: "Rainfall error",
-        tooltip: {
-          pointFormat: "(error range: {point.low}-{point.high} mm)<br/>"
-        },
-        type: "errorbar"
       }
+      // {
+      //   data: [
+      //     [0.024554703670239472, 0.07637320978494788],
+      //     [0.0000018156074109169128, 0.0000162287897705993],
+      //     [-0.2419328967749073, -0.1428698896693828]
+      //   ],
+      //   name: "Rainfall error",
+      //   // tooltip: {
+      //   //   pointFormat: "(error range: {point.low}-{point.high} mm)<br/>"
+      //   // },
+      //   type: "errorbar"
+      // }
     ],
     title: {
       text: "Temperature vs Rainfall"
