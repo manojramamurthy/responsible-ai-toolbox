@@ -186,11 +186,12 @@ def run_error_analyzer(model, X_test, y_test, feature_names,
                        categorical_features, tree_features=None,
                        max_depth=3, num_leaves=31,
                        min_child_samples=20,
-                       metric=None):
+                       metric=None, model_task=None):
     error_analyzer = ModelAnalyzer(model, X_test, y_test,
                                    feature_names,
                                    categorical_features,
-                                   metric=metric)
+                                   metric=metric,
+                                   model_task=model_task)
     if tree_features is None:
         tree_features = feature_names
     filters = None
